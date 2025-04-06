@@ -1,0 +1,71 @@
+import pandas as pd
+
+file=pd.read_csv("heart.csv")
+file
+
+file.head()
+
+file.tail()
+
+file.describe()
+
+file.info()
+
+file.isnull()
+
+file.isnull().sum()
+
+file
+
+from sklearn.preprocessing import LabelEncoder
+label_encoder = LabelEncoder()
+file["ChestPainType"]=label_encoder. fit_transform(file["ChestPainType"])
+file["ST_Slope"]=label_encoder. fit_transform(file["ST_Slope"])
+file
+
+X=file.drop(["Age","Sex","RestingECG","ExerciseAngina","Oldpeak","HeartDisease"],axis=1)
+X.head()
+
+Y=file["HeartDisease"]
+Y.head()
+
+from sklearn.model_selection import train_test_split
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=42)
+
+
+# X_train
+X_train.head()
+# X_train.tail()
+
+# X_test
+X_test.head()
+# X_test.tail()
+
+Y_train
+Y_train.head()
+# Y_train.tail()
+
+Y_test
+Y_test.head()
+# Y_test.tail()
+
+from sklearn.linear_model import LogisticRegression
+Model=LogisticRegression()
+Model.fit(X_train,Y_train)
+
+Y_pred = Model.predict(X_test)
+Y_pred
+# Y_test
+
+from sklearn.metrics import accuracy_score
+Accuracy = accuracy_score(Y_test,Y_pred)
+Accuracy
+
+import joblib
+joblib.dump(Model,"Heart_Patients.pkl")
+
+#import joblib
+Load_Model= joblib.load("Heart_Patients.pkl")
+Predictions = Load_Model.predict([[2,490,770,1,400,2]])
+Predictions
+
