@@ -1,0 +1,1 @@
+•	Developed a machine learning model using logistic regression to predict heart disease risk based on various patient features, leveraging data preprocessing, model training, and evaluation techniques to achieve high accuracy.
